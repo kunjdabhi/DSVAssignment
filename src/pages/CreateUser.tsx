@@ -23,7 +23,7 @@ export const CreateUser = ({ showSnackbar }: CreateUserProps) => {
     return initialValues as User;
   });
   const [errors, setErrors] = useState<ValidationErrors>({});
-  const [isUpdate, setIsUpdate] = useState<boolean>(id ? true : false);
+  const isUpdate = id ? true : false;
   const [loading, setLoading] = useState<boolean>(false);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
