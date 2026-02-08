@@ -1,6 +1,6 @@
 import type { User } from "../types/user.type";
 
-const baseUrl = "http://localhost:3001/users";
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export const userService = {
   getAll: async () => {
