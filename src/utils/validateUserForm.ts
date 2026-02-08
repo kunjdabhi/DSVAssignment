@@ -17,6 +17,8 @@ export const validateUser = (values: User): ValidationErrors => {
 
     if (field.pattern && value && !field.pattern.test(value.toString())) {
       errors[field.name] = `Invalid ${field.label}`;
+    } else if (field.required && value){
+      errors[field.name] = ``;
     }
   });
 

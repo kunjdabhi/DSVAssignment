@@ -1,6 +1,5 @@
-
 export type User = {
-    id?:number,
+  id?: number;
   firstName: string;
   lastName: string;
   emailAddress: string;
@@ -45,10 +44,8 @@ export const userFormSchema: FieldConfig[] = [
     name: "emailAddress",
     label: "Email Address",
     type: "email",
-    pattern: /^[^@]+@[^@]+\.[^@]+$/,
+    pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
     required: true,
     width: 12,
   },
 ];
-
-

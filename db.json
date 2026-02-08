@@ -4,22 +4,8 @@
       "id": "14",
       "firstName": "Nisha",
       "lastName": "Jain",
-      "phoneNumber": "+91-9000000014",
+      "phoneNumber": "9000000014",
       "emailAddress": "nisha.jain14@example.com"
-    },
-    {
-      "id": "15",
-      "firstName": "Sahil",
-      "lastName": "Kapoor",
-      "phoneNumber": "+91-9000000015",
-      "emailAddress": "sahil.kapoor15@example.com"
-    },
-    {
-      "id": "16",
-      "firstName": "Aditi",
-      "lastName": "Rao",
-      "phoneNumber": "+91-9000000016",
-      "emailAddress": "aditi.rao16@example.com"
     },
     {
       "id": "17",
@@ -60,7 +46,7 @@
       "id": "22",
       "firstName": "Simran",
       "lastName": "Kaur",
-      "phoneNumber": "+91-9000000022",
+      "phoneNumber": "9000000022",
       "emailAddress": "simran.kaur22@example.com"
     },
     {
@@ -260,54 +246,11 @@
       "emailAddress": "isha.kohli50@example.com"
     },
     {
-      "id": "76b4",
-      "firstName": "Kunj Dabhi",
-      "lastName": "Kunj Dabhi",
-      "email": "kunjdabhi0808@gmail.com",
-      "phoneNumber": "9409050351"
-    },
-    {
-      "id": "641d",
-      "firstName": "Kunj Dabhi",
-      "lastName": "Kunj Dabhi",
-      "email": "kunjdabhi0808@gmail.com",
-      "phoneNumber": "9409050351"
-    },
-    {
-      "id": "5516",
-      "firstName": "kunj",
-      "lastName": "dabhi",
-      "email": "kunjdabhi0808@gmail.com",
-      "phoneNumber": "9409050351"
-    },
-    {
-      "id": "828e",
-      "firstName": "kunj",
-      "lastName": "dabhi",
-      "emailAddress": "",
-      "phoneNumber": "9409050351",
-      "email": "kunjdabhi0808@gmail.com"
-    },
-    {
       "id": "c68a",
       "firstName": "kunj",
       "lastName": "dabhi",
       "emailAddress": "kunjdabhi0808@gmail.com",
       "phoneNumber": "9409050351"
-    },
-    {
-      "id": "1",
-      "firstName": "Aarav",
-      "lastName": "Patel",
-      "phoneNumber": "9000000001",
-      "emailAddress": "aarav.patel1@example.com"
-    },
-    {
-      "id": "1",
-      "firstName": "Aarav",
-      "lastName": "Patel",
-      "phoneNumber": "9000000001",
-      "emailAddress": "aarav.patel1@example.com89"
     }
   ]
 }

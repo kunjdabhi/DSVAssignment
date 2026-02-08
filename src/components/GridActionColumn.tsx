@@ -1,11 +1,13 @@
 import IconButton from "@mui/material/IconButton";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export const GridActionColumn = ({ params, handleEdit, handleDelete }: any) => {
   
   return (
     <>
       <IconButton size="small" onClick={() => handleEdit(params.row.id)}>
-        <span>Edit</span>
+        <EditIcon />
       </IconButton>
 
       <IconButton
@@ -13,7 +15,7 @@ export const GridActionColumn = ({ params, handleEdit, handleDelete }: any) => {
         color="error"
         onClick={() => handleDelete(params.row.id)}
       >
-        <span>Delete</span>
+        <DeleteIcon />
       </IconButton>
     </>
   );
