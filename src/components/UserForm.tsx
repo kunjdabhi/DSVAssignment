@@ -1,9 +1,9 @@
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Stack } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import {userFormSchema} from "../types/user.type"
 
 
-export const UserForm = ({ values, errors, onChange, onSubmit }: any) => {
+export const UserForm = ({ values, errors, onChange, onSubmit, onCancel }: any) => {
   return (
     <form onSubmit={onSubmit}>
       <Grid container spacing={2}>
@@ -15,19 +15,21 @@ export const UserForm = ({ values, errors, onChange, onSubmit }: any) => {
               label={field.label}
               type={field.type}
               value={values[field.name] || ""}
-              required={field.required}
-              error={Boolean(errors[field.name])}
-              helperText={errors[field.name]}
+              error={errors && Boolean(errors[field.name])}
+              helperText={errors && errors[field.name]}
               onChange={onChange}
             />
           </Grid>
         ))}
 
-        <Grid size={{ xs: 6 }}>
+        <Stack direction={"row"} spacing={3}>
           <Button type="submit" variant="contained">
             Save User
           </Button>
-        </Grid>
+          <Button onClick={onCancel} variant="contained" >
+            Cancel
+          </Button>
+        </Stack>
       </Grid>
     </form>
   )

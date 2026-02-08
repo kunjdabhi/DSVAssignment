@@ -1,9 +1,9 @@
-import { type GridColDef } from "@mui/x-data-grid";
 
 export type User = {
+    id?:number,
   firstName: string;
   lastName: string;
-  email: string;
+  emailAddress: string;
   phoneNumber: string;
 };
 
@@ -42,19 +42,13 @@ export const userFormSchema: FieldConfig[] = [
     width: 12,
   },
   {
-    name: "email",
+    name: "emailAddress",
     label: "Email Address",
     type: "email",
+    pattern: /^[^@]+@[^@]+\.[^@]+$/,
     required: true,
     width: 12,
   },
 ];
 
 
-export const userGridDefs: GridColDef[] = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First name", width: 200 },
-  { field: "lastName", headerName: "Last name", width: 200 },
-  { field: "emailAddress", headerName: "Email", width: 300 },
-  { field: "phoneNumber", headerName: "Phone", width: 250 },
-];

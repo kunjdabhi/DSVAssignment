@@ -1,31 +1,59 @@
 import { DataGrid } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { userService } from "../services/users.service";
 import type { User } from "../types/user.type";
-import { userGridDefs } from "../types/user.type";
+import { GridActionColumn } from "./GridActionColumn";
+import type { GridColDef } from "@mui/x-data-grid";
+import { useNavigate } from "react-router-dom";
 
-
-const paginationModel = { page: 0, pageSize: 10 };
-
-export const UserGrid = () => {
+export const UserGrid = ({showSnackbar}:any) => {
   const [users, setUsers] = useState<User[]>([]);
 
-  useEffect(() => {
-    var ignore = false;
-    async function fetchUsers() {
-      const data = await userService.getAll();
-      if (!ignore) {
+  const userGridDefs: GridColDef[] = [
+    { field: "id", headerName: "ID", width: 70 },
+    { field: "firstName", headerName: "First name", width: 200 },
+    { field: "lastName", headerName: "Last name", width: 200 },
+    { field: "emailAddress", headerName: "Email", width: 300 },
+    { field: "phoneNumber", headerName: "Phone", width: 250 },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 250,
+      sortable: false,
+      filterable: false,
+      renderCell: (params: any) => <GridActionColumn params={params} handleDelete={handleDelete} handleEdit={handleEdit} />,
+    },
+  ];
+
+  const paginationModel = { page: 0, pageSize: 10 };
+
+  const fetchUsers = useCallback(async () => {
+    try{
+        const data = await userService.getAll();
         setUsers(data);
-      }
+    } catch(ex:any){
+        showSnackbar(ex.message, "error")
     }
-
-    fetchUsers();
-
-    return () => {
-      ignore = true;
-    };
   }, []);
+
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
+
+  const navigate = useNavigate();
+  const handleEdit = (id: number) => {
+    navigate(`/createUser?id=${id}`);
+  };
+
+  const handleDelete = async (id: number) => {
+    const deleteUser = confirm("Are you sure ?");
+    if (deleteUser) {
+      await userService.delete(id);
+      fetchUsers()
+      showSnackbar("User deleted successfully", "success")
+    }
+  };
 
   return (
     <div>
