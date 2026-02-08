@@ -61,3 +61,6 @@ The `UserForm` component will automatically render the appropriate input based o
 *   **Material UI**: Used for a polished, consistent look with pre-built components (Grid, TextField, etc.).
 *   **Dynamic Form Rendering**: The form inputs are generated from a central schema (`userFormSchema`). This avoids code duplication and makes adding new fields strictly a configuration task rather than a UI coding task.
 *   **JSON Server**: Used to mock a REST API for user CRUD operations, allowing the frontend to function effectively during development.
+
+## Note
+* Json server is deployed on render. so due to inactivity, it may take some time to start. So Please wait for 1 to 2 minutes until server starts properly.
