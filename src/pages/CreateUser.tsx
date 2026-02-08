@@ -1,4 +1,5 @@
 import { useEffect, useState, type ChangeEvent } from "react";
+import { Typography, Stack } from "@mui/material";
 import { UserForm } from "../components/UserForm";
 import type { User } from "../types/user.type";
 import { validateUser, type ValidationErrors } from "../utils/validateUserForm";
@@ -78,7 +79,8 @@ export const CreateUser = ({ showSnackbar }: any) => {
   };
 
   return (
-    <div>
+    <Stack spacing={2}>
+      <Typography variant="h4">{isUpdate ? "Update User" : "Create User"}</Typography>
       <UserForm
         values={formValues}
         errors={errors}
@@ -86,6 +88,6 @@ export const CreateUser = ({ showSnackbar }: any) => {
         onSubmit={onSubmit}
         onCancel={onCancel}
       />
-    </div>
+    </Stack>
   );
 };

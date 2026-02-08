@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { Home } from "./pages/Home"
 import { CreateUser } from "./pages/CreateUser"
-import { Alert, Snackbar } from "@mui/material"
+import { Alert, Snackbar, Container } from "@mui/material"
 import { useState } from "react";
 
 function App() {
@@ -21,15 +21,18 @@ function App() {
   return (
     <>
     <BrowserRouter>
-      <Routes>
-        <Route index element={<Home showSnackbar={showSnackbar} />} />
-        <Route path="/createUser" element={<CreateUser showSnackbar={showSnackbar} />} />
-        <Route path="/updateUser" element={<CreateUser />} />
-      </Routes>
+      <Container maxWidth="lg" sx={{ mt: 4 }}>
+        <Routes>
+          <Route index element={<Home showSnackbar={showSnackbar} />} />
+          <Route path="/createUser" element={<CreateUser showSnackbar={showSnackbar} />} />
+          <Route path="/updateUser" element={<CreateUser />} />
+        </Routes>
+      </Container>
     </BrowserRouter>
-     <Snackbar
+      <Snackbar
         open={snackbar.open}
         autoHideDuration={4000}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
         onClose={() => setSnackbar((p) => ({ ...p, open: false }))}
       >
         <Alert severity={snackbar.severity}>

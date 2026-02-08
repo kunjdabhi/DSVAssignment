@@ -12,14 +12,14 @@ export const UserGrid = ({showSnackbar}:any) => {
 
   const userGridDefs: GridColDef[] = [
     { field: "id", headerName: "ID", width: 70 },
-    { field: "firstName", headerName: "First name", width: 200 },
-    { field: "lastName", headerName: "Last name", width: 200 },
-    { field: "emailAddress", headerName: "Email", width: 300 },
-    { field: "phoneNumber", headerName: "Phone", width: 250 },
+    { field: "firstName", headerName: "First name", flex: 1 },
+    { field: "lastName", headerName: "Last name", flex: 1 },
+    { field: "emailAddress", headerName: "Email", flex: 1 },
+    { field: "phoneNumber", headerName: "Phone", flex: 1 },
     {
       field: "actions",
       headerName: "Actions",
-      width: 250,
+      flex: 1,
       sortable: false,
       filterable: false,
       renderCell: (params: any) => <GridActionColumn params={params} handleDelete={handleDelete} handleEdit={handleEdit} />,
