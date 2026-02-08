@@ -1,6 +1,8 @@
 import { useEffect, useState, type ChangeEvent } from "react";
+import { Typography, Stack } from "@mui/material";
 import { UserForm } from "../components/UserForm";
 import type { User } from "../types/user.type";
+import { userFormSchema } from "../types/user.type";
 import { validateUser, type ValidationErrors } from "../utils/validateUserForm";
 import { userService } from "../services/users.service";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -9,11 +11,12 @@ export const CreateUser = ({ showSnackbar }: any) => {
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
   const navigate = useNavigate();
-  const [formValues, setFormValues] = useState<User>({
-    firstName: "",
-    lastName: "",
-    emailAddress: "",
-    phoneNumber: "",
+  const [formValues, setFormValues] = useState<User>(() => {
+    const initialValues: any = {};
+    userFormSchema.forEach((field) => {
+      initialValues[field.name] = "";
+    });
+    return initialValues as User;
   });
   const [errors, setErrors] = useState<ValidationErrors>({});
   const [isUpdate, setIsUpdate] = useState<boolean>(id ? true : false);
@@ -78,7 +81,8 @@ export const CreateUser = ({ showSnackbar }: any) => {
   };
 
   return (
-    <div>
+    <Stack spacing={2}>
+      <Typography variant="h4">{isUpdate ? "Update User" : "Create User"}</Typography>
       <UserForm
         values={formValues}
         errors={errors}
@@ -86,6 +90,6 @@ export const CreateUser = ({ showSnackbar }: any) => {
         onSubmit={onSubmit}
         onCancel={onCancel}
       />
-    </div>
+    </Stack>
   );
 };

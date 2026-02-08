@@ -8,8 +8,8 @@ export type User = {
 
 type FieldType = "email" | "tel" | "text" | "options" | "checkbox" | "date";
 
-export interface FieldConfig {
-  name: string;
+export interface FieldConfig<T> {
+  name: keyof T;
   label: string;
   type: FieldType;
   required?: boolean;
@@ -17,7 +17,7 @@ export interface FieldConfig {
   width?: number;
 }
 
-export const userFormSchema: FieldConfig[] = [
+export const userFormSchema: FieldConfig<User>[] = [
   {
     name: "firstName",
     label: "First Name",

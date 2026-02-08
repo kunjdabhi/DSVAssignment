@@ -1,27 +1,6 @@
 {
   "users": [
     {
-      "id": "14",
-      "firstName": "Nisha",
-      "lastName": "Jain",
-      "phoneNumber": "9000000014",
-      "emailAddress": "nisha.jain14@example.com"
-    },
-    {
-      "id": "17",
-      "firstName": "Manish",
-      "lastName": "Mishra",
-      "phoneNumber": "+91-9000000017",
-      "emailAddress": "manish.mishra17@example.com"
-    },
-    {
-      "id": "18",
-      "firstName": "Priya",
-      "lastName": "Nair",
-      "phoneNumber": "+91-9000000018",
-      "emailAddress": "priya.nair18@example.com"
-    },
-    {
       "id": "19",
       "firstName": "Rohan",
       "lastName": "Saxena",
@@ -251,6 +230,13 @@
       "lastName": "dabhi",
       "emailAddress": "kunjdabhi0808@gmail.com",
       "phoneNumber": "9409050351"
+    },
+    {
+      "id": "46d6",
+      "firstName": "Priya",
+      "lastName": "Nair",
+      "phoneNumber": "9000000018",
+      "emailAddress": "priya.nair18@example.com"
     }
   ]
 }
