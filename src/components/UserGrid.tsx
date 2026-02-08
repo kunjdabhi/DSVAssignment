@@ -8,7 +8,9 @@ import { GridActionColumn } from "./GridActionColumn";
 import type { GridColDef } from "@mui/x-data-grid";
 import { useNavigate } from "react-router-dom";
 
-export const UserGrid = ({showSnackbar}:any) => {
+type ShowSnackbar = (message: string, severity: "success" | "error" | "info") => void;
+
+export const UserGrid = ({showSnackbar}: {showSnackbar: ShowSnackbar}) => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 

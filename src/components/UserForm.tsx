@@ -1,9 +1,19 @@
 import { TextField, Button, Stack, Checkbox, FormControlLabel, MenuItem, RadioGroup, Radio, FormLabel, FormControl } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import {userFormSchema} from "../types/user.type"
+import type { User } from "../types/user.type";
+import type { ValidationErrors } from "../utils/validateUserForm";
+import type { ChangeEvent, FormEvent } from "react";
 
+type UserFormProps = {
+  values: User;
+  errors: ValidationErrors;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: (e: FormEvent) => void;
+  onCancel: () => void;
+}
 
-export const UserForm = ({ values, errors, onChange, onSubmit, onCancel }: any) => {
+export const UserForm = ({ values, errors, onChange, onSubmit, onCancel }: UserFormProps) => {
   return (
     <form onSubmit={onSubmit}>
       <Grid container spacing={2}>

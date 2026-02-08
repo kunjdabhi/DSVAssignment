@@ -25,7 +25,7 @@ function App() {
         <Routes>
           <Route index element={<Home showSnackbar={showSnackbar} />} />
           <Route path="/createUser" element={<CreateUser showSnackbar={showSnackbar} />} />
-          <Route path="/updateUser" element={<CreateUser />} />
+          <Route path="/updateUser" element={<CreateUser showSnackbar={showSnackbar} />} />
         </Routes>
       </Container>
     </BrowserRouter>

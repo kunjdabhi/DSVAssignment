@@ -26,6 +26,11 @@ export const userService = {
   },
 
   create: async (user: User) => {
+    const users = await userService.getAll();
+    const isUserExist = users.some((u: User) => u.emailAddress === user.emailAddress);
+    if(isUserExist){
+        throw new Error("User already exists");
+    }
     const res = await fetch(baseUrl, {
       method: "Post",
       headers: {
@@ -41,6 +46,11 @@ export const userService = {
   },
 
   update: async (user: User) => {
+    const users = await userService.getAll();
+    const isUserExist = users.some((u: User) => u.emailAddress === user.emailAddress && u.id !== user.id);
+    if(isUserExist){
+        throw new Error("User already exists");
+    }
     const res = await fetch(baseUrl + `/${user.id}`,{
         method: "Put",
         headers: {

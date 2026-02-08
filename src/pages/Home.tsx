@@ -2,7 +2,9 @@ import { Button, Typography, Stack } from "@mui/material";
 import { UserGrid } from "../components/UserGrid";
 import { Link } from "react-router-dom";
 
-export const Home = ({showSnackbar}:any) => {
+type ShowSnackbar = (message: string, severity: "success" | "error" | "info") => void;
+
+export const Home = ({showSnackbar}: {showSnackbar: ShowSnackbar}) => {
   return (
     <Stack spacing={2}>
       <Stack direction="row" justifyContent="space-between" alignItems="center">

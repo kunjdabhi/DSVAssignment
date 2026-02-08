@@ -1,4 +1,4 @@
-import { useEffect, useState, type ChangeEvent } from "react";
+import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import { Typography, Stack, Backdrop, CircularProgress } from "@mui/material";
 import { UserForm } from "../components/UserForm";
 import type { User } from "../types/user.type";
@@ -7,7 +7,11 @@ import { validateUser, type ValidationErrors } from "../utils/validateUserForm";
 import { userService } from "../services/users.service";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-export const CreateUser = ({ showSnackbar }: any) => {
+type CreateUserProps = {
+  showSnackbar: (message: string, severity: "success" | "error" | "info") => void
+}
+
+export const CreateUser = ({ showSnackbar }: CreateUserProps) => {
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
   const navigate = useNavigate();
@@ -55,7 +59,7 @@ export const CreateUser = ({ showSnackbar }: any) => {
     };
   }, [id]);
 
-  const onSubmit = async (e: SubmitEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     try {
       e.preventDefault();
       const validations = validateUser(formValues);
