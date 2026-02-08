@@ -6,7 +6,7 @@ export type User = {
   phoneNumber: string;
 };
 
-type FieldType = "email" | "tel" | "text" | "options" | "checkbox" | "date";
+type FieldType = "email" | "tel" | "text" | "options" | "checkbox" | "date" | "radio";
 
 export interface FieldConfig<T> {
   name: keyof T;
@@ -15,6 +15,7 @@ export interface FieldConfig<T> {
   required?: boolean;
   pattern?: RegExp;
   width?: number;
+  options?: { label: string; value: string | number }[];
 }
 
 export const userFormSchema: FieldConfig<User>[] = [
@@ -47,5 +48,5 @@ export const userFormSchema: FieldConfig<User>[] = [
     pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
     required: true,
     width: 12,
-  },
+  }
 ];

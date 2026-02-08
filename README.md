@@ -1,73 +1,63 @@
-# React + TypeScript + Vite
+# User Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based user management application built with TypeScript, Vite, and Material UI.
 
-Currently, two official plugins are available:
+## Setup Instructions
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1.  **Install Dependencies**
+    ```bash
+    npm install
+    ```
 
-## React Compiler
+2.  **Start the Backend (Mock DB)**
+    ```bash
+    npx json-server --watch db.json --port 3001
+    ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+3.  **Start the Frontend**
+    ```bash
+    npm run dev
+    ```
 
-## Expanding the ESLint configuration
+The application will be available at `http://localhost:5173`.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## How to Add New Fields
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
+ The form is designed to be extensible. To add a new field, you only need to modify the schema configuration.
+
+1.  **Open** `src/types/user.type.ts`.
+2.  **Update the `User` type** definition to include your new field.
+3.  **Add a config object** to the `userFormSchema` array.
+
+**Example:**
+
+```typescript
+// 1. Add to User type
+export type User = {
+  // ... existing fields
+  gender?: string; // New field
+};
+
+// 2. Add to schema
+export const userFormSchema: FieldConfig<User>[] = [
+  // ... existing fields
   {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
+    name: "gender",
+    label: "Gender",
+    type: "radio", // Supported types: text, email, tel, date, radio, checkbox, options
+    width: 12,
+    options: [
+      { label: "Male", value: "male" },
+      { label: "Female", value: "female" },
     ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
   },
-])
+];
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The `UserForm` component will automatically render the appropriate input based on the `type` you specify.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Design Decisions
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+*   **Material UI**: Used for a polished, consistent look with pre-built components (Grid, TextField, etc.).
+*   **Dynamic Form Rendering**: The form inputs are generated from a central schema (`userFormSchema`). This avoids code duplication and makes adding new fields strictly a configuration task rather than a UI coding task.
+*   **JSON Server**: Used to mock a REST API for user CRUD operations, allowing the frontend to function effectively during development.

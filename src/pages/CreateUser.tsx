@@ -1,5 +1,5 @@
 import { useEffect, useState, type ChangeEvent } from "react";
-import { Typography, Stack } from "@mui/material";
+import { Typography, Stack, Backdrop, CircularProgress } from "@mui/material";
 import { UserForm } from "../components/UserForm";
 import type { User } from "../types/user.type";
 import { userFormSchema } from "../types/user.type";
@@ -20,6 +20,7 @@ export const CreateUser = ({ showSnackbar }: any) => {
   });
   const [errors, setErrors] = useState<ValidationErrors>({});
   const [isUpdate, setIsUpdate] = useState<boolean>(id ? true : false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
@@ -31,6 +32,7 @@ export const CreateUser = ({ showSnackbar }: any) => {
     var ignore = false;
     async function fetchUserById(id: number | string) {
       try {
+        setLoading(true);
         const user = await userService.getBy(id);
         console.log(user);
         if (user) {
@@ -40,6 +42,8 @@ export const CreateUser = ({ showSnackbar }: any) => {
         }
       } catch (ex: any) {
         showSnackbar(ex.message, "error");
+      } finally {
+        setLoading(false);
       }
     }
     if (isUpdate && id) {
@@ -63,6 +67,7 @@ export const CreateUser = ({ showSnackbar }: any) => {
         setErrors(validations);
         return;
       }
+      setLoading(true);
       if (isUpdate) {
         await userService.update(formValues);
         showSnackbar("User Updated successfully", "success");
@@ -70,10 +75,12 @@ export const CreateUser = ({ showSnackbar }: any) => {
         await userService.create(formValues);
         showSnackbar("User created successfully", "success");
       }
+      navigate("/");
     } catch (ex: any) {
       showSnackbar(ex.message, "error");
+    } finally {
+        setLoading(false);
     }
-    navigate("/");
   };
 
   const onCancel = () => {
@@ -82,6 +89,12 @@ export const CreateUser = ({ showSnackbar }: any) => {
 
   return (
     <Stack spacing={2}>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Typography variant="h4">{isUpdate ? "Update User" : "Create User"}</Typography>
       <UserForm
         values={formValues}

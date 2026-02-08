@@ -1,5 +1,6 @@
 import { DataGrid } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
+import { Backdrop, CircularProgress } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { userService } from "../services/users.service";
 import type { User } from "../types/user.type";
@@ -9,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 export const UserGrid = ({showSnackbar}:any) => {
   const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const userGridDefs: GridColDef[] = [
     { field: "id", headerName: "ID", width: 70 },
@@ -30,10 +32,13 @@ export const UserGrid = ({showSnackbar}:any) => {
 
   const fetchUsers = useCallback(async () => {
     try{
+        setLoading(true);
         const data = await userService.getAll();
         setUsers(data);
     } catch(ex:any){
         showSnackbar(ex.message, "error")
+    } finally {
+        setLoading(false);
     }
   }, []);
 
@@ -49,14 +54,27 @@ export const UserGrid = ({showSnackbar}:any) => {
   const handleDelete = async (id: number) => {
     const deleteUser = confirm("Are you sure ?");
     if (deleteUser) {
-      await userService.delete(id);
-      fetchUsers()
-      showSnackbar("User deleted successfully", "success")
+      try {
+        setLoading(true);
+        await userService.delete(id);
+        fetchUsers()
+        showSnackbar("User deleted successfully", "success")
+      } catch(ex:any) {
+        showSnackbar(ex.message, "error")
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
   return (
     <div>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Paper sx={{ height: 600, width: "100%" }}>
         <DataGrid
           rows={users}
